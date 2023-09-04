@@ -1,4 +1,4 @@
-# Proyecto de Catedra- Fase 1
+# Proyecto de Catedra - Fase 1 - GT:04T
 Proyecto de cátedra para la materia Diseño y Programación de Software Multiplataforma (DPS104)
 
 ## Autores✒️
