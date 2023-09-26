@@ -2,8 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Inicio from './Inicio';
-import BlocNotas from './BlocDeNotas'; // Pantalla de Bloc de Notas
-
+import BlocNotas from './BlocDeNotas';
 // Importa otras pantallas si es necesario
 
 const Stack = createNativeStackNavigator();
