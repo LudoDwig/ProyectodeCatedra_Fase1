@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList} from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -48,7 +48,7 @@ function BlocNotas({ navigation }) {
 
   return (
     <View>
-      <Text>Esta es la pantalla de Bloc de Notas.</Text>
+      <Text>Bloc de Notas, haz tus anotaciones escribiendo en el cuadro de texto.</Text>
 
       <TextInput
         placeholder="Escribe aquí..."
@@ -77,12 +77,15 @@ function BlocNotas({ navigation }) {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <Button
-        title="Volver a la página principal"
-        onPress={() => navigation.navigate('Inicio')}
-      />
+    
     </View>
   );
 }
+const styles = StyleSheet.create({
+  text:{
+    fontWeight: 'bold',
+    fontSize: 10,
+  }
+});
 
 export default BlocNotas;
