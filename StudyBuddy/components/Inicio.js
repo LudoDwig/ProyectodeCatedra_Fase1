@@ -9,7 +9,7 @@ function Inicio({ navigation }) {
     { name: 'Gadget 2', image: require('../src/img/map.png'), screen: 'Gadget2' },
     { name: 'Gadget 3', image: require('../src/img/user.png'), screen: 'Gadget3' },
     { name: 'Gadget 4', image: require('../src/img/calendar.png'), screen: 'Gadget4' },
-    { name: 'Gadget 5', image: require('../src/img/chronometer.png'), screen: 'Gadget5'},
+    { name: 'Gadget 5', image: require('../src/img/chronometer.png'), screen: 'Crono'},
   ];
 
   return (
