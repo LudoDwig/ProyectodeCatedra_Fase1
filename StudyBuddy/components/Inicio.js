@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Image, TouchableOpacity, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -9,12 +9,14 @@ function Inicio({ navigation }) {
     { name: 'Gadget 2', image: require('../src/img/map.png'), screen: 'Gadget2' },
     { name: 'Gadget 3', image: require('../src/img/user.png'), screen: 'Gadget3' },
     { name: 'Gadget 4', image: require('../src/img/calendar.png'), screen: 'Gadget4' },
-    { name: 'Gadget 5', image: require('../src/img/chronometer.png'), screen: 'Crono'},
+    { name: 'Cronometro', image: require('../src/img/chronometer.png'), screen: 'Cronómetro'},
+    { name: 'Recordatorio', image: require('../src/img/pdf-file.png'), screen: 'Recordatorio'},
+
   ];
+ 
 
   return (
-    
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       {gadgets.map((gadget, index) => (
         <TouchableOpacity
           key={index}
@@ -28,31 +30,31 @@ function Inicio({ navigation }) {
           <Text style={styles.text}>{gadget.name}</Text>
         </TouchableOpacity>
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     padding: 10,
   },
   column: {
-    flex: 1,
+    width: '48%', // Ancho de columna para dos columnas
     alignItems: 'center',
-    marginRight: 10, // Espaciado entre las columnas
+    marginBottom: 20, // Espaciado entre las filas
   },
   image: {
-    flex: 1,
     aspectRatio: 1, // Mantiene la relación de aspecto original de la imagen
-    width: 100, // Ancho de la columna
+    width: '100%', // Ancho del 100% de la columna
     height: undefined, // Altura se ajusta automáticamente
   },
   text: {
     marginTop: 10, // Espaciado hacia arriba desde la imagen
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
