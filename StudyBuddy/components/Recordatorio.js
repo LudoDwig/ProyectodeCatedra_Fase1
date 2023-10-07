@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList} from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -86,25 +86,30 @@ export default function Recordatorio() {
   };
 
   return (
-    <View>
-      <Text>Recordatorio</Text>
-      <Text style={{ color: 'red' }}>{error}</Text>
+    <View style={styles.container}>
+      <Text style={styles.headerText}>Recordatorio</Text>
+      <Text style={styles.errorText}>{error}</Text>
       <TextInput
         placeholder="Título"
         value={title}
         onChangeText={(text) => setTitle(text)}
+        style={styles.input}
       />
       {date && (
         <Text>Fecha Seleccionada: {date.toDateString()}</Text>
       )}
-      <Button
-        title="Seleccionar Fecha"
-        onPress={() => setShowDatePicker(true)}
-      />
-      <Button
-        title="Seleccionar Hora"
-        onPress={() => setShowTimePicker(true)}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Seleccionar Fecha"
+          onPress={() => setShowDatePicker(true)}
+          color="blue" // Color de fondo del botón
+        />
+        <Button
+          title="Seleccionar Hora"
+          onPress={() => setShowTimePicker(true)}
+          color="blue" // Color de fondo del botón
+        />
+        </View>
       {showDatePicker && (
         <DateTimePicker
           testID="datePicker"
@@ -141,18 +146,20 @@ export default function Recordatorio() {
           // Luego, puedes programar la notificación y realizar otras acciones aquí
           scheduleNotification(title, selectedDateTime);
         }}
+        color="green" // Color de fondo del botón
       />
 
-      <Text>Lista de Recordatorios:</Text>
+      <Text style={styles.listHeader}>Lista de Recordatorios:</Text>
       <FlatList
         data={reminders}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
-          <View>
+          <View style={styles.listItem}>
             <Text>{item.title} - {item.date.toLocaleString()}</Text>
             <Button
               title="Borrar"
               onPress={() => clearReminder(index)}
+              color="red" // Color de fondo del botón
             />
           </View>
         )}
@@ -160,3 +167,48 @@ export default function Recordatorio() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  headerText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  listHeader: {
+    marginTop: 20,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  listItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginVertical: 5,
+    backgroundColor: '#f0f0f0',
+  },
+});

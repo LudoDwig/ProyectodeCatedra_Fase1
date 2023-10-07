@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet} from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 function BlocNotas({ navigation }) {
   const [note, setNote] = useState('');
@@ -47,45 +46,72 @@ function BlocNotas({ navigation }) {
   };
 
   return (
-    <View>
-      <Text>Bloc de Notas, haz tus anotaciones escribiendo en el cuadro de texto.</Text>
+    <View style={styles.container}>
+      <Text style={styles.headerText}>Bloc de Notas, haz tus anotaciones escribiendo en el cuadro de texto.</Text>
 
       <TextInput
         placeholder="Escribe aquí..."
         value={note}
         onChangeText={(text) => setNote(text)}
         multiline={true}
-        style={{ height: 100, borderColor: 'gray', borderWidth: 1, margin: 10 }}
+        style={styles.input}
       />
 
       <Button
         title="Guardar Nota"
         onPress={addNote}
+        color="green" // Color de fondo del botón
       />
 
       <FlatList
         data={notesList}
         renderItem={({ item, index }) => (
-          <View>
-            <Text>{item}</Text>
+          <View style={styles.noteContainer}>
+            <Text style={styles.noteText}>{item}</Text>
             <Button
               title="Borrar"
               onPress={() => deleteNote(index)}
+              color="red" // Color de fondo del botón
             />
           </View>
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-
-    
     </View>
   );
 }
+
 const styles = StyleSheet.create({
-  text:{
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  headerText: {
+    fontSize: 18,
     fontWeight: 'bold',
-    fontSize: 10,
-  }
+    marginBottom: 10,
+  },
+  input: {
+    height: 100,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+  },
+  noteContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginVertical: 5,
+    backgroundColor: '#f0f0f0',
+  },
+  noteText: {
+    flex: 1,
+  },
 });
 
 export default BlocNotas;

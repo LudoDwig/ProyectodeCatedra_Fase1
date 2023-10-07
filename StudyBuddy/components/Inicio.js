@@ -1,16 +1,21 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { Image, TouchableOpacity, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
 function Inicio({ navigation }) {
   const gadgets = [
-    { name: 'Bloc de Notas', image: require('../src/img/to-do-list.png'), screen: 'Notas' },
-    { name: 'Gadget 2', image: require('../src/img/map.png'), screen: 'Gadget2' },
-    { name: 'Gadget 3', image: require('../src/img/user.png'), screen: 'Gadget3' },
-    { name: 'Gadget 4', image: require('../src/img/calendar.png'), screen: 'Gadget4' },
-    { name: 'Cronometro', image: require('../src/img/chronometer.png'), screen: 'Cronómetro'},
-    { name: 'Recordatorio', image: require('../src/img/pdf-file.png'), screen: 'Recordatorio'},
+    { name: 'Bloc de Notas', image: require('../src/img/bloc-notas.jpg'), screen: 'Notas' },
+    { name: 'Cronometro', image: require('../src/img/cronometro.jpg'), screen: 'Cronómetro'},
+    { name: 'Recordatorio', image: require('../src/img/recordatorio.jpg'), screen: 'Recordatorio'},
+    { name: 'Numero Aleatorio', image: require('../src/img/dado.jpg'), screen: 'Aleatorio' },
+    { name: 'Texto a voz', image: require('../src/img/texto-a-voz.jpg'), screen: 'Texto a Voz' },
+    { name: 'Generador QR', image: require('../src/img/codigoqr.jpg'), screen: 'Generador QR'},
+    { name: 'Gadget 2', image: require('../src/img/mapa-ubicacion.jpg'), screen: 'Gadget2' },
+    { name: 'Calendario', image: require('../src/img/agenda.jpg'), screen: 'Calendario' },
+    { name: 'Lector QR-Barra', image: require('../src/img/agenda.jpg'), screen: 'Lector QR-Barra' },
+    { name: 'Gadget 4', image: require('../src/img/user.png'), screen: 'Gadget4' },
+    
 
   ];
  
@@ -47,6 +52,8 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Espaciado entre las filas
   },
   image: {
+    borderWidth: 4,
+    borderRadius: 50,
     aspectRatio: 1, // Mantiene la relación de aspecto original de la imagen
     width: '100%', // Ancho del 100% de la columna
     height: undefined, // Altura se ajusta automáticamente
