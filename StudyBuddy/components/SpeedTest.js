@@ -14,9 +14,18 @@ const SpeedTestApp = () => {
   }, [downloadSpeed, progress]);
 
   const measureSpeed = async () => {
-    // Simula una medición de velocidad (reemplaza esto con tu lógica real)
-    const simulatedDownloadSpeed = 50; // Velocidad de descarga simulada en MB/s
-    setDownloadSpeed(simulatedDownloadSpeed);
+    try {
+      const startTimestamp = Date.now();
+      const response = await fetch('https://autogestion.metrotel.com.ar/speedtest/archivo10MB.zip');
+      const endTimestamp = Date.now();
+      const contentLength = parseInt(response.headers.get('Content-Length'), 10);
+      const fileSizeInMB = contentLength / 1024 / 1024; // Tamaño del archivo en megabytes
+      const durationInSeconds = (endTimestamp - startTimestamp) / 1000; // Tiempo en segundos
+      const downloadSpeed = (fileSizeInMB / durationInSeconds).toFixed(2); // Calcular velocidad en MB/s
+      setDownloadSpeed(downloadSpeed + ' MB/s');
+    } catch (error) {
+      console.error('Error al medir la velocidad: ', error);
+    }
   };
 
   return (
