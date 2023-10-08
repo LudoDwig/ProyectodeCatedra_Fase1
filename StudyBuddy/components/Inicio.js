@@ -15,6 +15,7 @@ function Inicio({ navigation }) {
     { name: 'Calendario', image: require('../src/img/agenda.jpg'), screen: 'Calendario' },
     { name: 'Lector QR-Barra', image: require('../src/img/agenda.jpg'), screen: 'Lector QR-Barra' },
     { name: 'Speed test', image: require('../src/img/speedtest.png'), screen: 'Speed test' },
+    { name: 'Conversor', image: require('../src/img/Conversor.png'), screen: 'Conversor de unidades' },
     { name: 'Gadget 4', image: require('../src/img/user.png'), screen: 'Gadget4' },
     
 

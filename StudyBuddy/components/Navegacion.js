@@ -11,7 +11,7 @@ import QRGenerador from './GenerarQR';
 import Calendario from './Calendario';
 import LectorCodigos from './Lector-QR-Barra';
 import SpeedTest from './SpeedTest';
-
+import ConversorDeUnidades from './ConversorDeUnidades';
 
 // Importa otras pantallas si es necesario
 
@@ -30,6 +30,7 @@ const NavegacionApp = () =>{
         <Stack.Screen name="Calendario" component={Calendario}/>
         <Stack.Screen name="Lector QR-Barra" component={LectorCodigos}/>
         <Stack.Screen name="Speed test" component={SpeedTest}/>
+        <Stack.Screen name="Conversor de unidades" component={ConversorDeUnidades}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

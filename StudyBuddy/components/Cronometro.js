@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function CronometroApp({ navigation }) {
   const [running, setRunning] = useState(false);
   const [time, setTime] = useState(0);
 
+  const handleStartStop = useCallback(() => {
+    setRunning((prevRunning) => !prevRunning);
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setRunning(false);
+    setTime(0);
+  }, []);
+
   useEffect(() => {
     let timer;
     if (running) {
       timer = setInterval(() => {
         setTime((prevTime) => prevTime + 1);
-      }, 1000);
+      }, 100); // Cambiado a 10 para representar milisegundos
     } else {
       clearInterval(timer);
     }
@@ -18,23 +27,18 @@ export default function CronometroApp({ navigation }) {
     return () => clearInterval(timer);
   }, [running]);
 
-  const handleStartStop = () => {
-    setRunning(!running);
+  const formatTime = (milliseconds) => {
+    const totalMilliseconds = milliseconds % 1000;
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const seconds = totalSeconds % 60;
+    const minutes = Math.floor(totalSeconds / 60);
+    const hours = Math.floor(minutes / 60);
+
+    return `${padTime(hours)}:${padTime(minutes)}:${padTime(seconds)}.${padTime(totalMilliseconds, 3)}`;
   };
 
-  const handleReset = () => {
-    setRunning(false);
-    setTime(0);
-  };
-
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${padTime(minutes)}:${padTime(remainingSeconds)}`;
-  };
-
-  const padTime = (time) => {
-    return time < 10 ? `0${time}` : `${time}`;
+  const padTime = (time, length = 2) => {
+    return String(time).padStart(length, '0');
   };
 
   return (
@@ -50,12 +54,7 @@ export default function CronometroApp({ navigation }) {
           <Text style={styles.buttonText}>Reiniciar</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={styles.configButton}
-        onPress={() => navigation.navigate('Configuracion')}
-      >
-        <Text style={styles.configButtonText}>Configuración</Text>
-      </TouchableOpacity>
+    
     </View>
   );
 }
@@ -68,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   timer: {
-    fontSize: 48,
+    fontSize: 36,
     fontWeight: 'bold',
   },
   buttonsContainer: {
