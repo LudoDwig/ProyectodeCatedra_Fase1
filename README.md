@@ -1,8 +1,8 @@
 # Proyecto de Catedra - Fase 1 - GT:04T
 Proyecto de cátedra para la materia Diseño y Programación de Software Multiplataforma (DPS104)
 
-##
- [Enlace Video Funcionamiento] https://drive.google.com/file/d/1iR-yBGNFMtiaLuslBO6hVicyMN0x5nK9/view?usp=sharing
+## [Enlace, Video Funcionamiento] https://drive.google.com/file/d/1iR-yBGNFMtiaLuslBO6hVicyMN0x5nK9/view?usp=sharing
+
 ### Autores✒️
 * Ludwig Stanley Pérez Campos    -PC191777
 * Eduardo José Deras Mancia      -DM201736
