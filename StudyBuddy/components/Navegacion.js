@@ -10,8 +10,10 @@ import TextoAVoz from './Texto-A-Voz';
 import QRGenerador from './GenerarQR';
 import Calendario from './Calendario';
 import LectorCodigos from './Lector-QR-Barra';
-import SpeedTest from './SpeedTest';
-import ConversorDeUnidades from './ConversorDeUnidades';
+import TicTacToe from './XyO';
+import Ruleta from './Ruleta';
+//<Stack.Screen name="Ruleta" component={Ruleta}/>
+
 
 // Importa otras pantallas si es necesario
 
@@ -29,8 +31,10 @@ const NavegacionApp = () =>{
         <Stack.Screen name="Generador QR" component={QRGenerador}/>
         <Stack.Screen name="Calendario" component={Calendario}/>
         <Stack.Screen name="Lector QR-Barra" component={LectorCodigos}/>
-        <Stack.Screen name="Speed test" component={SpeedTest}/>
-        <Stack.Screen name="Conversor de unidades" component={ConversorDeUnidades}/>
+        <Stack.Screen name="X y O" component={TicTacToe}/>
+        <Stack.Screen name="Ruleta" component={Ruleta}/>
+
+      
       </Stack.Navigator>
     </NavigationContainer>
   );

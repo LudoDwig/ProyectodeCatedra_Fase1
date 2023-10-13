@@ -14,6 +14,15 @@ export default function Recordatorio() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+      // Solicitar permiso para notificaciones al iniciar la aplicación
+      async function requestNotificationPermission() {
+        const { status } = await Notifications.requestPermissionsAsync();
+        if (status !== 'granted') {
+          setError('Se requieren permisos de notificación para usar esta función.');
+        }
+      }
+  
+      requestNotificationPermission()
     // Cargar recordatorios almacenados en AsyncStorage al iniciar la aplicación
     loadReminders();
   }, []);

@@ -1,30 +1,48 @@
-import React from 'react';
-import { Image, TouchableOpacity, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { Image, TouchableOpacity, Text, StyleSheet, ScrollView, Dimensions, TextInput, View } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 
 function Inicio({ navigation }) {
+  const [searchTerm, setSearchTerm] = useState('');
+
   const gadgets = [
     { name: 'Bloc de Notas', image: require('../src/img/bloc-notas.jpg'), screen: 'Notas' },
-    { name: 'Cronometro', image: require('../src/img/cronometro.jpg'), screen: 'Cronómetro'},
     { name: 'Recordatorio', image: require('../src/img/recordatorio.jpg'), screen: 'Recordatorio'},
+    { name: 'Cronometro', image: require('../src/img/cronometro.jpg'), screen: 'Cronómetro'},
+    
     { name: 'Numero Aleatorio', image: require('../src/img/dado.jpg'), screen: 'Aleatorio' },
+    { name: 'Ruleta', image: require('../src/img/ruleta.jpg'), screen: 'Ruleta' },
     { name: 'Texto a voz', image: require('../src/img/texto-a-voz.jpg'), screen: 'Texto a Voz' },
     { name: 'Generador QR', image: require('../src/img/codigoqr.jpg'), screen: 'Generador QR'},
+    { name: 'Lector QR-Barra', image: require('../src/img/lector-qr.jpg'), screen: 'Lector QR-Barra' },
+    { name: 'X y O', image: require('../src/img/equis-cero.jpg'), screen: 'X y O' },
     { name: 'Gadget 2', image: require('../src/img/mapa-ubicacion.jpg'), screen: 'Gadget2' },
     { name: 'Calendario', image: require('../src/img/agenda.jpg'), screen: 'Calendario' },
-    { name: 'Lector QR-Barra', image: require('../src/img/agenda.jpg'), screen: 'Lector QR-Barra' },
-    { name: 'Speed test', image: require('../src/img/speedtest.png'), screen: 'Speed test' },
-    { name: 'Conversor', image: require('../src/img/Conversor.png'), screen: 'Conversor de unidades' },
     { name: 'Gadget 4', image: require('../src/img/user.png'), screen: 'Gadget4' },
-    
-
+   
+  
   ];
- 
+
+  // Filtrar gadgets basados en el término de búsqueda
+  const filteredGadgets = gadgets.filter((gadget) =>
+    gadget.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {gadgets.map((gadget, index) => (
+      {/* Contenedor para el campo de búsqueda */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Buscar gadgets..."
+          value={searchTerm}
+          onChangeText={(text) => setSearchTerm(text)}
+          style={styles.searchInput}
+        />
+      </View>
+
+      {/* Mapeo y renderizado de gadgets filtrados */}
+      {filteredGadgets.map((gadget, index) => (
         <TouchableOpacity
           key={index}
           onPress={() => navigation.navigate(gadget.screen)}
@@ -64,6 +82,18 @@ const styles = StyleSheet.create({
     marginTop: 10, // Espaciado hacia arriba desde la imagen
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  searchContainer: {
+    width: '100%', // Ancho del 100% del contenedor principal
+    marginBottom: 10, // Espaciado entre el campo de búsqueda y los gadgets
+  },
+  searchInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    width: '100%', // Ancho del 100% del contenedor de búsqueda
   },
 });
 
