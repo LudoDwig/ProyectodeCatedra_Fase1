@@ -48,7 +48,7 @@ export default function LectorCodigos() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       >
-        <BarcodeMask width={300} height={300} edgeColor="#62B1F6" showAnimatedLine />
+        <BarcodeMask width={300} height={300} edgeColor="#F31A1A" showAnimatedLine />
       </BarCodeScanner>
       {scanned && (
         <View style={styles.infoContainer}>

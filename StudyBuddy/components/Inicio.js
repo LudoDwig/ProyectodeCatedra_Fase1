@@ -10,18 +10,22 @@ function Inicio({ navigation }) {
     { name: 'Bloc de Notas', image: require('../src/img/bloc-notas.jpg'), screen: 'Notas' },
     { name: 'Recordatorio', image: require('../src/img/recordatorio.jpg'), screen: 'Recordatorio'},
     { name: 'Cronometro', image: require('../src/img/cronometro.jpg'), screen: 'Cronómetro'},
-    
+    { name: 'Calculadora', image: require('../src/img/calculadora.jpg'), screen: 'Calculadora' },
     { name: 'Numero Aleatorio', image: require('../src/img/dado.jpg'), screen: 'Aleatorio' },
     { name: 'Ruleta', image: require('../src/img/ruleta.jpg'), screen: 'Ruleta' },
     { name: 'Texto a voz', image: require('../src/img/texto-a-voz.jpg'), screen: 'Texto a Voz' },
     { name: 'Generador QR', image: require('../src/img/codigoqr.jpg'), screen: 'Generador QR'},
     { name: 'Lector QR-Barra', image: require('../src/img/lector-qr.jpg'), screen: 'Lector QR-Barra' },
+    { name: 'Generar contraseña', image: require('../src/img/gen-contra.jpg'), screen: 'Generar contraseña' },
     { name: 'X y O', image: require('../src/img/equis-cero.jpg'), screen: 'X y O' },
-    { name: 'Gadget 2', image: require('../src/img/mapa-ubicacion.jpg'), screen: 'Gadget2' },
-    { name: 'Calendario', image: require('../src/img/agenda.jpg'), screen: 'Calendario' },
-    { name: 'Gadget 4', image: require('../src/img/user.png'), screen: 'Gadget4' },
-   
-  
+    { name: 'Calculadora IMC', image: require('../src/img/imc.jpg'), screen: 'Calculadora IMC' },
+    { name: 'Calculadora de periodo', image: require('../src/img/calc-menstru.jpg'), screen: 'Calculadora de periodo' },
+    { name: 'Conversor de monedas', image: require('../src/img/conv-mon.jpg'), screen: 'Conversor de monedas' },
+    { name: 'Calculador de tiempo', image: require('../src/img/calen-diferencia.jpg'), screen: 'Calculador de tiempo' },
+    { name: 'Informacion del dispositivo', image: require('../src/img/info.jpg'), screen: 'Informacion del dispositivo' },
+    { name: 'Informacion de Bateria', image: require('../src/img/inf-bateria.jpg'), screen: 'Informacion de Bateria' },
+
+    
   ];
 
   // Filtrar gadgets basados en el término de búsqueda

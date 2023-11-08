@@ -130,13 +130,15 @@ const styles = StyleSheet.create({
   },
   redText: {
     color: 'red',
+    fontWeight: 'bold',
   },
   blueText: {
     color: 'blue',
+    fontWeight: 'bold',
   },
   board: {
     flexDirection: 'column',
-    backgroundColor: '#333',
+    backgroundColor: '#AD6E5A',
     padding: 10,
     borderRadius: 10,
   },
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
   },
   resetButton: {
     marginTop: 20,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#CDAFAF',
     padding: 10,
     borderRadius: 10,
   },

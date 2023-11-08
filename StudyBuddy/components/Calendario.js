@@ -1,122 +1,195 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
-import * as Calendar from 'expo-calendar';
-import * as Notifications from 'expo-notifications';
+import React, { useState } from 'react';
+import { View, Text, Button, TextInput, StyleSheet, ScrollView } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { Calendar } from 'react-native-calendars';
+import { LocaleConfig } from 'react-native-calendars';
 
-function Calendario() {
-  const [events, setEvents] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [title, setTitle] = useState('');
+// Configura la localización en español para react-native-calendars
+LocaleConfig.locales['es'] = {
+  monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+  monthNamesShort: ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'],
+  dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+  dayNamesShort: ['Dom.', 'Lun.', 'Mar.', 'Mié.', 'Jue.', 'Vie.', 'Sáb.'],
+};
 
-  useEffect(() => {
-    loadEvents();
-  }, []);
+LocaleConfig.defaultLocale = 'es';
 
-  const loadEvents = async () => {
-    const { status } = await Calendar.requestCalendarPermissionsAsync();
+function CalendarioOvulacion() {
+  const [lastPeriodDate, setLastPeriodDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [cycleLength, setCycleLength] = useState('28');
+  const [markedDates, setMarkedDates] = useState({});
+  const [fertilePeriodLabel, setFertilePeriodLabel] = useState('');
+  const [infertilePeriodLabel, setInfertilePeriodLabel] = useState('');
 
-    if (status === 'granted') {
-      const calendars = await Calendar.getCalendarsAsync();
-      const defaultCalendar = calendars.find((cal) => cal.isPrimary);
 
-      const startDate = new Date();
-      const endDate = new Date();
-      endDate.setFullYear(endDate.getFullYear() + 1);
-
-      const events = await Calendar.getEventsAsync(
-        [defaultCalendar.id],
-        startDate,
-        endDate
-      );
-
-      setEvents(events);
+  const onChangeDate = (event, selectedDate) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setLastPeriodDate(selectedDate);
     }
   };
 
-  const addEvent = async () => {
-    if (!title) {
-      alert('Ingrese un título para el evento.');
+  const calculateFertileDays = () => {
+    const cycleLengthInt = parseInt(cycleLength, 10);
+    if (isNaN(cycleLengthInt) || cycleLengthInt < 21 || cycleLengthInt > 35) {
       return;
     }
 
-    const startDate = new Date(selectedDate);
-    const endDate = new Date(selectedDate);
-    endDate.setHours(endDate.getHours() + 1);
+    const ovulationDate = new Date(lastPeriodDate);
+    ovulationDate.setDate(ovulationDate.getDate() + Math.floor(cycleLengthInt / 2));
 
-    const defaultCalendar = await Calendar.getDefaultCalendarAsync();
-    const newEvent = {
-      title,
-      startDate,
-      endDate,
-      timeZone: 'America/Los_Angeles',
-      location: 'Ubicación del evento',
-      notes: 'Notas del evento',
-      calendarId: defaultCalendar.id,
-    };
+    const fertileStart = new Date(ovulationDate);
+    fertileStart.setDate(fertileStart.getDate() - 5);
 
-    await Calendar.createEventAsync(defaultCalendar.id, newEvent);
-    loadEvents();
-    setTitle('');
-  };
+    const fertileEnd = new Date(ovulationDate);
+    fertileEnd.setDate(fertileEnd.getDate() + 4);
 
-  const scheduleNotification = async (eventId, eventTitle, eventDate) => {
-    const trigger = new Date(eventDate);
+    const cycleStartDate = new Date(lastPeriodDate);
+    const cycleEndDate = new Date(lastPeriodDate);
+    cycleEndDate.setDate(cycleEndDate.getDate() + cycleLengthInt);
 
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: 'Recordatorio de evento',
-        body: `No olvides tu evento: ${eventTitle}`,
-      },
-      trigger,
-    });
+    // Marca los días fértiles en rojo
+    let newMarkedDates = {};
+
+    let currentDate = new Date(fertileStart);
+    while (currentDate <= fertileEnd) {
+      const dateStr = currentDate.toISOString().split('T')[0];
+      newMarkedDates[dateStr] = { selected: true, selectedColor: 'red' };
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    // Marca los días infértiles en verde
+    currentDate = new Date(cycleStartDate);
+    while (currentDate <= cycleEndDate) {
+      const dateStr = currentDate.toISOString().split('T')[0];
+      if (!newMarkedDates[dateStr]) {
+        newMarkedDates[dateStr] = { selected: true, selectedColor: 'green' };
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    setMarkedDates({ ...newMarkedDates });
+
+    setFertilePeriodLabel(`Días Fértiles: ${fertileStart.toDateString()} - ${fertileEnd.toDateString()}`);
+    setInfertilePeriodLabel(`Días de poca fertilidad' : ${cycleStartDate.toDateString()} - ${cycleEndDate.toDateString()}`);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Calendario de Eventos</Text>
-      <Button title="Cargar Eventos" onPress={loadEvents} />
-
-      <Text style={styles.title}>Agregar Evento</Text>
-      <Text>Fecha del Evento:</Text>
-      <Button
-        title={selectedDate.toDateString()}
-        onPress={() => {
-          /* Implementa una selección de fecha aquí */
-        }}
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.mainTitle}>Calculadora de Ovulación</Text>
+      <Calendar
+        onDayPress={calculateFertileDays}
+        markedDates={markedDates}
+        style={styles.calendar}
       />
-      <Text>Título del Evento:</Text>
-      <TextInput
-        value={title}
-        onChangeText={setTitle}
-        style={styles.input}
-      />
-      <Button title="Agregar Evento" onPress={addEvent} />
+      <View style={styles.formContainer}>
+        <Text style={styles.formTitle}>Ingresa la fecha de tu último período:</Text>
+        <Button title="Seleccionar Fecha" onPress={() => setShowDatePicker(true)} />
+        <Text>Fecha seleccionada: {lastPeriodDate.toDateString()}</Text>
+        
+        {showDatePicker && (
+          <DateTimePicker
+            value={lastPeriodDate}
+            mode="date"
+            is24Hour={true}
+            display="default"
+            onChange={onChangeDate}
+          />
+        )
+        }
 
-      <Text style={styles.title}>Eventos Programados</Text>
-      {events.map((event) => (
-        <Text key={event.id}>{event.title} - {event.startDate.toDateString()}</Text>
-      ))}
-    </View>
+        <Text style={styles.formTitle}>Ingresa la duración de tu ciclo menstrual promedio:</Text>
+        <TextInput
+          value={cycleLength}
+          onChangeText={text => setCycleLength(text)}
+          keyboardType="numeric"
+          placeholder="28"
+          style={styles.textInput}
+        />
+
+        <Button title="Calcular Días Fértiles" onPress={calculateFertileDays} />
+      </View>
+      <View style={styles.resultContainer}>
+        <Text style={styles.resultTitle}>Resultados</Text>
+        <Text style={styles.fertileLabel}>Días Fértiles</Text>
+        <View style={styles.fertileBox}>
+          <Text style={styles.fertileText}>{fertilePeriodLabel}</Text>
+        </View>
+        <Text style={styles.infertileLabel}>Días Infértiles</Text>
+        <View style={styles.infertileBox}>
+          <Text style={styles.infertileText}>{infertilePeriodLabel}</Text>
+        </View>
+      </View>
+    </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
+    flexGrow: 1,
+    alignItems: 'center',
+    padding: 20,
   },
-  title: {
+  mainTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  formContainer: {
+    marginTop: 20,
+  },
+  formTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  calendar: {
+    width: 350,
+    height: 350,
+  },
+  resultContainer: {
+    marginTop: 20,
+  },
+  resultTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginVertical: 8,
+    marginBottom: 10,
   },
-  input: {
-    height: 40,
-    borderColor: 'gray',
+  fertileLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  fertileBox: {
+    backgroundColor: 'lightcoral',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  fertileText: {
+    color: 'white',
+  },
+  infertileLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  infertileBox: {
+    backgroundColor: 'lightgreen',
+    padding: 10,
+    borderRadius: 5,
+  },
+  infertileText: {
+    color: 'white',
+  },
+  textInput: {
+    marginBottom: 10,
     borderWidth: 1,
-    marginBottom: 16,
-    paddingHorizontal: 8,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
   },
 });
 
-export default Calendario;
+export default CalendarioOvulacion;
