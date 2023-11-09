@@ -24,7 +24,7 @@ export default function InfBateria() {
     setSubscription(
       Battery.addBatteryLevelListener(({ batteryLevel }) => {
         setBatteryLevel(batteryLevel);
-        console.log('batteryLevel changed!', batteryLevel);
+       
       })
     );
   };
@@ -52,18 +52,19 @@ export default function InfBateria() {
                 source={
                   batteryLevel > 0.8
                     ? require('../src/bgs/niv-bateria.jpg')
-                    : batteryLevel <= 0.8
+                    : batteryLevel > 0.6
                     ? require('../src/bgs/niv-bateria80.jpg')
-                    : batteryLevel <= 0.6
+                    : batteryLevel > 0.4
                     ? require('../src/bgs/niv-bateria60.jpg')
-                    : batteryLevel <= 0.4
+                    : batteryLevel > 0.2
                     ? require('../src/bgs/niv-bateria40.jpg')
-                    : batteryLevel <= 0.2
+                    : batteryLevel > 0
                     ? require('../src/bgs/niv-bateria20.jpg')
                     : require('../src/bgs/niv-bateria0.jpg')
                 }
                 style={styles.batteryImage}
               />
+
             </View>
           )}
           <Text style={styles.title}>Nivel de batería</Text>
