@@ -11,7 +11,7 @@ export default function CalculadoraReact() {
     if (value === '=') {
       try {
         const result = eval(display);
-        setDisplay(result.toFixed(4).toString());
+        setDisplay(result.toFixed(2).toString());
         setHistory([...history, { expression: display, result: result.toFixed(2) }]);
       } catch (error) {
         setDisplay('Error');
