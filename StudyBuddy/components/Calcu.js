@@ -22,7 +22,7 @@ export default function CalculadoraReact() {
       setDisplay(display.slice(0, -1));
     } else if (value === '√') {
       const squareRoot = Math.sqrt(parseFloat(display));
-      setDisplay(squareRoot.toFixed(4).toString());
+      setDisplay(squareRoot.toFixed(2).toString());
     } else {
       setDisplay(display + value);
     }
