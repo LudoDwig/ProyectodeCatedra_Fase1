@@ -1,8 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { FAB } from 'react-native-paper'; // Importa el componente FAB de react-native-paper
 import Inicio from './Inicio';
 import BlocNotas from './BlocDeNotas';
 import CronometroApp from './Cronometro';
@@ -22,11 +20,13 @@ import CalculadoraIMC from './IMC';
 import CalculaldoraReact from './Calcu';
 import InfDispositivo from './Informacion';
 import GenContra from './ContraseñasAleatorias';
-import { BackHandler } from 'react-native'
-const Stack = createNativeStackNavigator();
-import { Alert } from 'react-native';
+//<Stack.Screen name="Ruleta" component={Ruleta}/>
 
-const NavegacionApp = () => {
+
+// Importa otras pantallas si es necesario
+
+const Stack = createNativeStackNavigator();
+const NavegacionApp = () =>{
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -42,6 +42,7 @@ const NavegacionApp = () => {
         <Stack.Screen name="X y O" component={TicTacToe}/>
         <Stack.Screen name="Ruleta" component={Ruleta}/>
         <Stack.Screen name="Calculadora menstrual" component={Color}/>
+      
         <Stack.Screen name="Calculador de tiempo" component={TimeCalculator}/>
         <Stack.Screen name="Conversor de monedas" component={ConvMonedas}/>
         <Stack.Screen name="Calculadora IMC" component={CalculadoraIMC}/>
@@ -49,54 +50,12 @@ const NavegacionApp = () => {
         <Stack.Screen name="Informacion del dispositivo" component={InfDispositivo}/>
         <Stack.Screen name="Generar contraseña" component={GenContra}/>
         <Stack.Screen name="Informacion de Bateria" component={InfBateria}/>
+        
+      
+      
       </Stack.Navigator>
-      <FloatingMenu />
     </NavigationContainer>
   );
-};
-
-const FloatingMenu = () => {
-  return (
-    <View style={styles.floatingMenu}>
-      <TouchableOpacity onPress={() => exitApp()}>
-      <FAB
-          icon="exit-to-app"
-          label="Salir"
-          style={{ backgroundColor: 'white' }}
-        />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const exitApp = () => {
-  Alert.alert(
-    'Salir de la aplicación',
-    '¿Estás seguro de que quieres salir?',
-    [
-      {
-        text: 'Cancelar',
-        style: 'cancel',
-      },
-      {
-        text: 'Salir',
-        onPress: () => {
-    
-          
-          BackHandler.exitApp();
-        },
-      },
-    ],
-    { cancelable: false }
-  );
-};
-
-const styles = StyleSheet.create({
-  floatingMenu: {
-    position: 'absolute',
-    bottom: 16,
-    right: 16,
-  },
-});
+}
 
 export default NavegacionApp;
