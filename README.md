@@ -14,4 +14,4 @@ Proyecto de cátedra para la materia Diseño y Programación de Software Multipl
 *  [Enlace- Trello] https://trello.com/b/NwhlaSg7
 *  [Enlace- Video del Funcionamiento] https://drive.google.com/file/d/1iR-yBGNFMtiaLuslBO6hVicyMN0x5nK9/view?usp=sharing
 *  [Enlace Manual Tecnico] https://www.canva.com/design/DAF0BQiEQbc/XdY0jbxK7J0O1_9xblJRKg/view?utm_content=DAF0BQiEQbc&utm_campaign=designshare&utm_medium=link&utm_source=editor
-*  [Enlace Manual de Usuario] https://drive.google.com/file/d/1BJoF_xAxS_bKqKkuYyTBLGUVJn1I4ie3/view?usp=sharing
+*  [Enlace Manual de Usuario] https://www.canva.com/design/DAF0BcDBvU0/AalWeNkcY3kFFCSztb-BEA/view?utm_content=DAF0BcDBvU0&utm_campaign=designshare&utm_medium=link&utm_source=editor
