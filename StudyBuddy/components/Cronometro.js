@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 
 export default function CronometroApp() {
   const [running, setRunning] = useState(false);
@@ -50,6 +50,10 @@ export default function CronometroApp() {
   const capturing = running || capturedTimes.length > 0;
 
   return (
+    <ImageBackground
+      source={require('../src/bgs/cro-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+      style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <View style={styles.timerContainer}>
         <Text style={styles.timer}>{formatTime(time)}</Text>
@@ -79,6 +83,7 @@ export default function CronometroApp() {
         </ScrollView>
       )}
     </View>
+    </ImageBackground>
   );
 }
 
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#E6D2E6',
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
   },
   timerContainer: {
     borderWidth: 5,
@@ -104,6 +109,10 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     marginBottom: 20,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
   },
   button: {
     backgroundColor: '#007AFF',

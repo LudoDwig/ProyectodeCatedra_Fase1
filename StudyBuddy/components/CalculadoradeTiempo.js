@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const TimeCalculator = () => {
@@ -42,20 +42,26 @@ const TimeCalculator = () => {
     const months = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
     const weeks = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7));
     const days = Math.floor((timeDiff % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+   
 
     const differences = {
       'Años': years,
       'Meses': months,
       'Semanas': weeks,
       'Días': days,
-      'Horas': hours,
+      
+     
     };
 
     setTimeDifferences(differences);
   };
 
   return (
+    <ImageBackground
+        source={require('../src/bgs/calc-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
+        
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Calculadora de Tiempo</Text>
@@ -97,16 +103,26 @@ const TimeCalculator = () => {
         </View>
       )}
     </ScrollView>
+    
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
-    alignItems: 'center',
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
+  container: {
+    flex:1,
     justifyContent: 'center',
-    backgroundColor: 'white',
-    padding: 20,
+    alignItems: 'center',
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
   },
   titleContainer: {
     marginBottom: 20,

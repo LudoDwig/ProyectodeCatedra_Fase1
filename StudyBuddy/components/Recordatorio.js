@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet, ImageBackground } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -95,8 +95,12 @@ export default function Recordatorio() {
   };
 
   return (
+    <ImageBackground
+      source={require('../src/bgs/re-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+      style={styles.backgroundImage}
+      >
     <View style={styles.container}>
-      <Text style={styles.headerText}>Recordatorio</Text>
+      <Text style={styles.headerText}>                 Recordatorio</Text>
       <Text style={styles.errorText}>{error}</Text>
       <TextInput
         placeholder="Título"
@@ -174,39 +178,56 @@ export default function Recordatorio() {
         )}
       />
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    flex:1,
+    
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
+    alignItems: 'center',
   },
   errorText: {
     color: 'red',
     marginBottom: 10,
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
     borderWidth: 1,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+        borderRadius: 5,       
+        borderColor: 'green',
+        borderWidth: 0,
+        borderRadius: 10,
+        padding: 10,
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+        backgroundColor: 'rgba(230, 231, 254, 0.55)',
+        paddingBottom: 15,
+        marginBottom:10,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
   },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
   listHeader: {
     marginTop: 20,
+   
     fontSize: 16,
     fontWeight: 'bold',
   },

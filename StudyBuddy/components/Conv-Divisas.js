@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const ConvMonedas = () => {
@@ -76,6 +76,10 @@ const ConvMonedas = () => {
   };
 
   return (
+    <ImageBackground
+        source={require('../src/bgs/ru-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <Text style={styles.title}>Moneda de Origen:</Text>
       <Picker
@@ -122,12 +126,25 @@ const ConvMonedas = () => {
         </View>
       )}
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
   container: {
-    padding: 20,
+   flex:1,
+    justifyContent: 'center',
+    
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
   },
   title: {
     fontSize: 20,
@@ -147,11 +164,15 @@ const styles = StyleSheet.create({
     marginBottom: 10, // Margen vertical de 10 unidades
   },
   input: {
+    width: 60,
     borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    fontSize: 16,
+    borderRadius: 5,       
+    borderColor: 'green',
+    borderWidth: 0,
+    borderRadius: 10,
+    padding: 10,
+    borderBottomWidth: 2,
+    backgroundColor: 'rgba(230, 231, 254, 0.55)'
   },
   convertButton: {
     // Estilo del botón de conversión (color configurado arriba)

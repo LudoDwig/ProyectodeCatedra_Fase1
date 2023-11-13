@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 
 const CalculadoraIMC = () => {
   const [weight, setWeight] = useState('');
@@ -30,6 +30,10 @@ const CalculadoraIMC = () => {
   };
 
   return (
+    <ImageBackground
+        source={require('../src/bgs/img-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <Text style={styles.label}>Peso (kg):</Text>
       <TextInput
@@ -49,23 +53,41 @@ const CalculadoraIMC = () => {
 
       {result && <Text style={styles.result}>{result}</Text>}
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
-    alignItems: 'center',
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
+  container: {
+    flex:1,
     justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 100,
+    marginTop: 100,
   },
   label: {
     fontSize: 18,
   },
   input: {
-    width: 100,
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 10,
+    width: 70,
+        borderWidth: 1,
+        borderRadius: 5,       
+        borderColor: 'green',
+       
+        borderRadius: 10,
+        padding: 10,
+        borderBottomWidth: 4,
+        backgroundColor: 'rgba(230, 231, 254, 0.85)',
+        marginBottom: 20,
   },
   result: {
     fontSize: 20,

@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   },
   passwordText: {
     fontSize: 24,
+    backgroundColor: 'rgba(230, 231, 254, 0.55)'
   },
   copyButtonContainer: {
     marginLeft: 10,
@@ -101,12 +102,17 @@ const styles = StyleSheet.create({
   
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: 100,
-    textAlign: 'center',
-    marginRight: 10,
+        width: 60,
+        marginRight: 10,
+        borderWidth: 1,
+        borderRadius: 5,       
+        borderColor: 'yellow',
+    
+        borderRadius: 10,
+        padding: 10,
+        borderTopWidth: 4,
+        borderBottomWidth: 4,
+        backgroundColor: 'rgba(230, 231, 254, 0.55)'
   },
 });
 

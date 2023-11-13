@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 import * as Speech from 'expo-speech';
 
 function TextoAVoz() {
@@ -16,6 +16,10 @@ function TextoAVoz() {
   };
 
   return (
+    <ImageBackground
+        source={require('../src/bgs/tex-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <Text style={styles.header}>Texto a Voz</Text>
       <TextInput
@@ -30,15 +34,25 @@ function TextoAVoz() {
         <Button title="Limpiar" onPress={clearText} color="blue" />
       </View>
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
+  container: {
+    flex:1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
   },
   header: {
     fontSize: 20,
@@ -46,12 +60,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: '100%',
-    height: 100,
-    borderColor: 'gray',
+    height: 300,
+    width:300,
     borderWidth: 1,
-    marginVertical: 10,
-    paddingHorizontal: 10,
+    borderRadius: 5,       
+    borderColor: 'green',
+   
+    borderRadius: 10,
+    padding: 10,
+    borderTopWidth: 4,
+    borderBottomWidth: 4,
+    backgroundColor: 'rgba(230, 231, 254, 0.55)',
+    marginBottom: 15,
   },
   buttonContainer: {
     flexDirection: 'row',

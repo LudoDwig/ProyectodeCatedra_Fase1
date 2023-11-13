@@ -20,8 +20,7 @@ import CalculadoraIMC from './IMC';
 import CalculaldoraReact from './Calcu';
 import InfDispositivo from './Informacion';
 import GenContra from './ContraseñasAleatorias';
-//<Stack.Screen name="Ruleta" component={Ruleta}/>
-
+import IpSubnet from './IP-subnet';
 
 // Importa otras pantallas si es necesario
 
@@ -42,7 +41,7 @@ const NavegacionApp = () =>{
         <Stack.Screen name="X y O" component={TicTacToe}/>
         <Stack.Screen name="Ruleta" component={Ruleta}/>
         <Stack.Screen name="Calculadora menstrual" component={Color}/>
-      
+        <Stack.Screen name="Subneteo" component={IpSubnet}/>
         <Stack.Screen name="Calculador de tiempo" component={TimeCalculator}/>
         <Stack.Screen name="Conversor de monedas" component={ConvMonedas}/>
         <Stack.Screen name="Calculadora IMC" component={CalculadoraIMC}/>

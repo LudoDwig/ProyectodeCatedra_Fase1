@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -72,6 +72,10 @@ const TicTacToe = () => {
   };
 
   return (
+    <ImageBackground
+        source={require('../src/bgs/tic-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text
@@ -80,7 +84,7 @@ const TicTacToe = () => {
             winner === 'X' ? styles.redText : winner === 'O' ? styles.blueText : null,
           ]}
         >
-          {winner ? `Ganador: ${winner}` : 'Tic Tac Toe'}
+          {winner ? `Ganador: ${winner}` : 'X y O'}
         </Text>
       </View>
       <View style={styles.board}>
@@ -109,10 +113,15 @@ const TicTacToe = () => {
         </TouchableOpacity>
       )}
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -121,7 +130,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     marginBottom: 20,
     padding: 10,
-    backgroundColor: '#333',
+    backgroundColor: 'rgba(200, 250, 178, 0.85)',
     borderRadius: 10,
   },
   header: {
@@ -138,7 +147,7 @@ const styles = StyleSheet.create({
   },
   board: {
     flexDirection: 'column',
-    backgroundColor: '#AD6E5A',
+    backgroundColor: 'rgba(80, 231, 196, 0.85)',
     padding: 10,
     borderRadius: 10,
   },

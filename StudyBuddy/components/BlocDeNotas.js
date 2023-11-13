@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, StyleSheet, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function BlocNotas({ navigation }) {
@@ -46,6 +46,10 @@ function BlocNotas({ navigation }) {
   };
 
   return (
+    <ImageBackground
+      source={require('../src/bgs/bn-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+      style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <Text style={styles.headerText}>Bloc de Notas, haz tus anotaciones escribiendo en el cuadro de texto.</Text>
 
@@ -78,26 +82,43 @@ function BlocNotas({ navigation }) {
         keyExtractor={(item, index) => index.toString()}
       />
     </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
+    flex:1,
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
+    },
   headerText: {
+    paddingLeft: 30,
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
   input: {
     height: 100,
-    borderColor: 'gray',
     borderWidth: 1,
-    marginVertical: 10,
-    paddingHorizontal: 10,
+        borderRadius: 5,       
+        borderColor: 'green',
+        borderWidth: 0,
+        borderRadius: 10,
+        padding: 10,
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+        backgroundColor: 'rgba(230, 231, 254, 0.55)',
+        paddingBottom: 15,
+        marginBottom:10,
   },
   noteContainer: {
     flexDirection: 'row',

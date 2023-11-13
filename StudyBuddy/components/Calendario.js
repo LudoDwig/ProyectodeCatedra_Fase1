@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Button, TextInput, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Calendar } from 'react-native-calendars';
 import { LocaleConfig } from 'react-native-calendars';
@@ -76,12 +76,19 @@ function CalendarioOvulacion() {
   };
 
   return (
+    <ImageBackground
+        source={require('../src/bgs/ov-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.mainTitle}>Calculadora de Ovulación</Text>
       <Calendar
         onDayPress={calculateFertileDays}
         markedDates={markedDates}
         style={styles.calendar}
+        theme={{
+          calendarBackground: 'rgba(165, 231, 218, 0.45)',
+        }}
       />
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>Ingresa la fecha de tu último período:</Text>
@@ -122,14 +129,29 @@ function CalendarioOvulacion() {
         </View>
       </View>
     </ScrollView>
+      </ImageBackground>
+
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
   container: {
-    flexGrow: 1,
+    flexGrow:1,
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.85)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
+    marginLeft: 10,
+    marginRight: 10,
+    paddingBottom:50,
   },
   mainTitle: {
     fontSize: 24,
@@ -147,6 +169,10 @@ const styles = StyleSheet.create({
   calendar: {
     width: 350,
     height: 350,
+    borderColor: 'gray',
+    borderWidth: 1,
+    color: 'gray',
+    borderRadius: 30,
   },
   resultContainer: {
     marginTop: 20,
@@ -184,11 +210,15 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   textInput: {
-    marginBottom: 10,
     borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 5,
-    padding: 10,
+        borderRadius: 5,       
+        borderColor: 'green',
+        
+        borderRadius: 10,
+        padding: 10,
+        borderBottomWidth: 4,
+        backgroundColor: 'rgba(230, 231, 254, 0.55)',
+        marginBottom: 15,
   },
 });
 

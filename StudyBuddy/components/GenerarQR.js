@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, Image, Alert, StyleSheet, ImageBackground } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
-    alignItems: 'center',
+    resizeMode: 'cover', // Puedes ajustar la propiedad de redimensionamiento según tus necesidades
+  },
+  container: {
+    flex:1,
     justifyContent: 'center',
-    backgroundColor: '#f0f0f0',
+    alignItems: 'center',
+    borderRadius: 50,
+    backgroundColor: 'rgba(230, 231, 254, 0.65)',
+    marginTop: 20,
+    paddingLeft: 7,
+    padding: 15,
+    marginBottom: 30,
   },
   title: {
     fontSize: 24,
@@ -19,13 +28,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: '100%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    backgroundColor: 'white',
-    marginBottom: 10,
+        borderWidth: 1,
+        borderRadius: 5,       
+        borderColor: 'green',
+        borderWidth: 0,
+        borderRadius: 10,
+        padding: 10,
+        borderBottomWidth: 4,
+        borderTopWidth: 4,
+        backgroundColor: 'rgba(230, 231, 254, 0.9)'
   },
   qrCodeContainer: {
     width: '80%',
@@ -75,6 +86,10 @@ export default function QRGenerador() {
 
   
   return (
+    <ImageBackground
+        source={require('../src/bgs/qr-bg.jpg')} // Reemplaza con la ruta de tu imagen de fondo
+        style={styles.backgroundImage}
+      >
     <View style={styles.container}>
       <Text style={styles.title}>Generador de Código QR</Text>
       <View style={styles.inputContainer}>
@@ -104,5 +119,6 @@ export default function QRGenerador() {
         <Button title="Limpiar" onPress={clearInput} style={styles.clearButton} />
       </View>
     </View>
+    </ImageBackground>
   );
 }
