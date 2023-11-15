@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "StudyBuddy",
+    "slug": "StudyBuddy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/splash1.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash1.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#660664"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon1.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.recdwig.StudyBuddy"
+    },
+    "web": {
+      "favicon": "./assets/icon1.png"
+    },
+    "plugins": [
+      "expo-localization", "@react-native-google-signin/google-signin"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3f44ac56-e8e9-44b8-8548-5240db7dacfd"
+      }
+    }
+  }
+}
